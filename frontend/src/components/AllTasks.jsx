@@ -27,7 +27,7 @@ const AllTasks = ({allTasks,userId,setModal,setEditTask}) => {
       userId:userId,
       taskId:taskId
     }
-    fetch('http://localhost:3000/api/deleteTask', {
+    fetch('https://taskify-unhb.onrender.com/api/deleteTask', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
