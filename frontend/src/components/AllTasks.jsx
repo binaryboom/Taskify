@@ -27,7 +27,8 @@ const AllTasks = ({allTasks,userId,setModal,setEditTask}) => {
       userId:userId,
       taskId:taskId
     }
-    fetch('https://taskify-unhb.onrender.com/api/deleteTask', {
+    fetch('https://taskify-raghav.vercel.app/api/deleteTask', {
+    // fetch('https://taskify-unhb.onrender.com/api/deleteTask', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
