@@ -11,7 +11,7 @@ const Home = ({username,userId ,setButton,setLogged,reset,setCreated,created}) =
   let [editTask,setEditTask]=useState([]);
     useEffect(() => {
       if (modal === 'getAllTasks') {
-      fetch('http://localhost:3000/api/findAllTasks', {
+      fetch('https://taskify-unhb.onrender.com/api/findAllTasks', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
