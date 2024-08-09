@@ -33,7 +33,7 @@ const Login = () => {
   const onSubmit = async (data) => {
     setLoading(true)
     console.log(data)
-    fetch('http://localhost:3000/api/login', {
+    fetch('https://taskify-unhb.onrender.com/api/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
