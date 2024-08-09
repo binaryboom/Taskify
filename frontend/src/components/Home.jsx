@@ -5,7 +5,7 @@ import Inbox from './Inbox'
 import UpdateTask from './UpdateTask'
 
 
-const Home = ({username,userId ,setButton,setLogged,reset,setCreated,created}) => {
+const Home = ({username,userId ,setButton,setLogged,reset,setCreated,created,handleLogout}) => {
   const [modal, setModal] = useState('getAllTasks');
   let [task,setTask]=useState([]);
   let [editTask,setEditTask]=useState([]);
@@ -49,7 +49,7 @@ const Home = ({username,userId ,setButton,setLogged,reset,setCreated,created}) =
       <div style={{display:modal==='getAllTasks'?'none':''}}><input onClick={()=>{setModal('getAllTasks') ,setCreated(false)}}  type="submit" value="All Tasks" /></div>
       <div style={{display:modal==='inbox'?'none':''}}><input onClick={()=>{setModal('inbox')}}  type="submit" value="Inbox" /></div>
       <div style={{display:modal==='newTask'?'none':''}}><input onClick={()=>{setModal('newTask') ,setCreated(false)}}  type="submit" value="New Task" /></div>
-      <div><input onClick={()=>{setModal('login') ,setLogged(false),reset(),setButton('Continue')}}  type="submit" value="Logout" /></div>
+      <div><input onClick={()=>{handleLogout(),setModal('login') ,setLogged(false),reset(),setButton('Continue')}}  type="submit" value="Logout" /></div>
     </div>
         
     <div className='home'>
