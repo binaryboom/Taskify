@@ -21,7 +21,8 @@ const TaskForm = ({ userId,created,setCreated ,setModal}) => {
     }, [setModal,created, setCreated]);
     
     useEffect(() => {
-        fetch('https://taskify-unhb.onrender.com/api/findAllUsers')
+        fetch('https://taskify-raghav.vercel.app/api/findAllUsers')
+        // fetch('https://taskify-unhb.onrender.com/api/findAllUsers')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -39,7 +40,8 @@ const TaskForm = ({ userId,created,setCreated ,setModal}) => {
     const { handleSubmit, register, formState: { errors } } = useForm({});
     const onSubmit = async (data) => {
         console.log(data)
-        fetch('https://taskify-unhb.onrender.com/api/task', {
+        fetch('https://taskify-raghav.vercel.app/api/task', {
+        // fetch('https://taskify-unhb.onrender.com/api/task', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
