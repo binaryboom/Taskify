@@ -40,7 +40,7 @@ const UpdateTask = ({ userId,created,setCreated ,setModal,task}) => {
     }, [setModal,created, setCreated]);
     
     useEffect(() => {
-        fetch('http://localhost:3000/api/findAllUsers')
+        fetch('https://taskify-unhb.onrender.com/api/findAllUsers')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -60,7 +60,7 @@ const UpdateTask = ({ userId,created,setCreated ,setModal,task}) => {
     const onSubmit = async (data) => {
         console.log(data)
     
-        fetch('http://localhost:3000/api/task/updateTask', {
+        fetch('https://taskify-unhb.onrender.com/api/task/updateTask', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
