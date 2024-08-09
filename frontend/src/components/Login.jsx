@@ -11,6 +11,20 @@ const Login = () => {
   let [created, setCreated] = useState(false);
   let [myError,setMyError]=useState({})
 
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      const userData = JSON.parse(storedUser);
+      setUser(userData);
+      setLogged(true);
+    }
+  }, []);
+  const handleLogout = () => {
+    localStorage.removeItem('user');
+    setUser({});
+    setLogged(false);
+  };
+
   const {
     register,
     handleSubmit,
@@ -74,7 +88,7 @@ const Login = () => {
           showAlert(`Welcome ${data.username}`,'green');
           setLogged(true)
           setUser({username:data.username,userId:data.userId})
-          
+          localStorage.setItem('user', JSON.stringify({ username: data.username, userId: data.userId }));
         }
         
       })
@@ -86,7 +100,7 @@ const Login = () => {
     });
   }
   if (logged) {
-    return <Home username={user.username} setButton={setButton} reset={reset} setCreated={setCreated} setLogged={setLogged} created={created} userId={user.userId}/>; // Render Home component if user is logged in
+    return <Home username={user.username} setButton={setButton} reset={reset} setCreated={setCreated} setLogged={setLogged} created={created} handleLogout={handleLogout} userId={user.userId}/>; // Render Home component if user is logged in
   }
   return (
     <div className='login'>
