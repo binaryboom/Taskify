@@ -17,7 +17,7 @@ const inbox = ({userId}) => {
   }
   let [emails,setEmails]=useState('none')
   useEffect(() => {
-    fetch('http://localhost:3000/api/findAllEmails', {
+    fetch('https://taskify-unhb.onrender.com/api/findAllEmails', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
