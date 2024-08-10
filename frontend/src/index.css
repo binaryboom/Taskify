@@ -254,6 +254,9 @@ i{
     .content{
        order: 4;
     }
+    .alert{
+       width: 88vw;
+    }
    
      .inbox-card{
         display: grid;
