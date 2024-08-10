@@ -5,6 +5,7 @@ import { useAlert } from '../context/AlertContext';
 
 
 const UpdateTask = ({ userId,created,setCreated ,setModal,task}) => {
+  let [loading,setLoading]=useState(false);
     const { showAlert } = useAlert()
     let [users, setUser] = useState([]);
     const { handleSubmit,setValue, register, formState: { errors } } = useForm({});
@@ -40,10 +41,12 @@ const UpdateTask = ({ userId,created,setCreated ,setModal,task}) => {
     }, [setModal,created, setCreated]);
     
     useEffect(() => {
+      setLoading(true)
         fetch('https://taskify-raghav.vercel.app/api/findAllUsers')
         // fetch('https://taskify-unhb.onrender.com/api/findAllUsers')
             .then(response => {
                 if (!response.ok) {
+                  showAlert('Unable to connect with server :( ')
                     throw new Error('Network response was not ok');
                 }
                 return response.json();
@@ -53,14 +56,17 @@ const UpdateTask = ({ userId,created,setCreated ,setModal,task}) => {
                
             })
             .catch(error => {
+              showAlert('Unable to connect with server :( ')
                 console.error('There has been a problem with your fetch operation:', error);
             })
-
+            .finally(()=>{
+              setLoading(false)
+            })
     }, []);
     
     const onSubmit = async (data) => {
+        setLoading(true)
         console.log(data)
-    
         fetch('https://taskify-raghav.vercel.app/api/task/updateTask', {
         // fetch('https://taskify-unhb.onrender.com/api/task/updateTask', {
             method: 'POST',
@@ -71,6 +77,7 @@ const UpdateTask = ({ userId,created,setCreated ,setModal,task}) => {
         })
             .then(response => {
                 if (!response.ok) {
+                  showAlert('Unable to connect with server :( ')
                     throw new Error('Network response was not ok');
                 }
                 return response.json();
@@ -88,13 +95,18 @@ const UpdateTask = ({ userId,created,setCreated ,setModal,task}) => {
 
             })
             .catch(error => {
+              showAlert('Unable to connect with server :( ')
                 console.error('There has been a problem with your fetch operation:', error);
+            })
+            .finally(()=>{
+              setLoading(false)
             })
     }
 
     return (
 
 <>
+{loading && <center><span class="loader"></span></center> }
 {created===true? <h1>Task Updated Successfully 🎉</h1> :
         (
             <div className="edit-modal">

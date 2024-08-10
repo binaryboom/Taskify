@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form';
 
 const TaskForm = ({ userId,created,setCreated ,setModal}) => {
     let [users, setUser] = useState([]);
-    
+    let [loading,setLoading]=useState(false);
     useEffect(() => {
         if (created) {
             const timer = setTimeout(() => {
@@ -21,10 +21,12 @@ const TaskForm = ({ userId,created,setCreated ,setModal}) => {
     }, [setModal,created, setCreated]);
     
     useEffect(() => {
+        setLoading(true)
         fetch('https://taskify-raghav.vercel.app/api/findAllUsers')
         // fetch('https://taskify-unhb.onrender.com/api/findAllUsers')
             .then(response => {
                 if (!response.ok) {
+                    showAlert('Unable to connect with server :( ')
                     throw new Error('Network response was not ok');
                 }
                 return response.json();
@@ -33,12 +35,17 @@ const TaskForm = ({ userId,created,setCreated ,setModal}) => {
                 setUser(data);
             })
             .catch(error => {
+                showAlert('Unable to connect with server :( ')
                 console.error('There has been a problem with your fetch operation:', error);
             })
+            .finally(()=>{
+                setLoading(false)
+              })
 
     }, []);
     const { handleSubmit, register, formState: { errors } } = useForm({});
     const onSubmit = async (data) => {
+        setLoading(true)
         console.log(data)
         fetch('https://taskify-raghav.vercel.app/api/task', {
         // fetch('https://taskify-unhb.onrender.com/api/task', {
@@ -50,6 +57,7 @@ const TaskForm = ({ userId,created,setCreated ,setModal}) => {
         })
             .then(response => {
                 if (!response.ok) {
+                    showAlert('Unable to connect with server :( ')
                     throw new Error('Network response was not ok');
                 }
                 return response.json();
@@ -62,13 +70,18 @@ const TaskForm = ({ userId,created,setCreated ,setModal}) => {
 
             })
             .catch(error => {
+                showAlert('Unable to connect with server :( ')
                 console.error('There has been a problem with your fetch operation:', error);
             })
+            .finally(()=>{
+                setLoading(false)
+              })
     }
 
     return (
 
 <>
+{loading && <center><span class="loader"></span></center> }
 {created===true? <h1>Task Created Successfully 🎉</h1> :
         <form id="newTask" onSubmit={handleSubmit(onSubmit)}>
             <br /><br />

@@ -6,11 +6,13 @@ import UpdateTask from './UpdateTask'
 
 
 const Home = ({username,userId ,setButton,setLogged,reset,setCreated,created,handleLogout}) => {
+  let [loading,setLoading]=useState(false);
   const [modal, setModal] = useState('getAllTasks');
   let [task,setTask]=useState([]);
   let [editTask,setEditTask]=useState([]);
     useEffect(() => {
       if (modal === 'getAllTasks') {
+        setLoading(true)
       fetch('https://taskify-raghav.vercel.app/api/findAllTasks', {
       // fetch('https://taskify-unhb.onrender.com/api/findAllTasks', {
         method: 'POST',
@@ -21,6 +23,7 @@ const Home = ({username,userId ,setButton,setLogged,reset,setCreated,created,han
       })
       .then(response => {
         if (!response.ok) {
+          showAlert('Unable to connect with server :( ')
           throw new Error('Network response was not ok');
         }
         return response.json();
@@ -38,7 +41,11 @@ const Home = ({username,userId ,setButton,setLogged,reset,setCreated,created,han
         }
       })
       .catch(error => {
+        showAlert('Unable to connect with server :( ')
           console.error('There has been a problem with your fetch operation:', error);
+      })
+      .finally(()=>{
+        setLoading(false)
       })
     } 
       },[modal]);

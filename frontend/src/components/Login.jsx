@@ -57,6 +57,7 @@ const Login = () => {
     })
       .then(response => {
         if (!response.ok) {
+          showAlert('Unable to connect with server :( ')
           throw new Error('Network response was not ok');
         }
         return response.json();
@@ -94,6 +95,7 @@ const Login = () => {
         
       })
       .catch(error => {
+        showAlert('Unable to connect with server :( ')
         console.error('There has been a problem with your fetch operation:', error);
       })
       .finally(() => {
@@ -141,7 +143,7 @@ const Login = () => {
         {myError.show && <span style={{ color: 'red' }}>{myError.message}</span>} <br />
         <br />
         {/* {errors.myError && toast.error(errors['myError']['message'], {errProps})}  */}
-        {loading && <div > Logging.... </div>}
+        {loading && <center><span class="loader"></span></center> }
 
         
 

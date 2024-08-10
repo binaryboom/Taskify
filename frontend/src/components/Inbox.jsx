@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 const inbox = ({userId}) => {
+  let [loading,setLoading]=useState(false);
   function formatDateTime(isoString) {
     const date = new Date(isoString);
   
@@ -17,6 +18,7 @@ const inbox = ({userId}) => {
   }
   let [emails,setEmails]=useState('none')
   useEffect(() => {
+    setLoading(true)
     fetch('https://taskify-raghav.vercel.app/api/findAllEmails', {
     // fetch('https://taskify-unhb.onrender.com/api/findAllEmails', {
       method: 'POST',
@@ -27,6 +29,7 @@ const inbox = ({userId}) => {
     })
     .then(response => {
       if (!response.ok) {
+        showAlert('Unable to connect with server :( ')
         throw new Error('Network response was not ok');
       }
       return response.json();
@@ -43,9 +46,13 @@ const inbox = ({userId}) => {
       }
     })
     .catch(error => {
+      showAlert('Unable to connect with server :( ')
         console.error('There has been a problem with your fetch operation:', error);
     })
-          
+    .finally(()=>{
+      setLoading(false)
+    })
+
     },[]);
     if(emails==='none'){
       return (
@@ -54,6 +61,7 @@ const inbox = ({userId}) => {
   }
   return (
     <>
+    {loading && <center><span class="loader"></span></center> }
     {emails==='none'?<center><h1>No Emails Available 😪</h1></center>:
     <div className='inbox'>
       {emails.map(e=>(

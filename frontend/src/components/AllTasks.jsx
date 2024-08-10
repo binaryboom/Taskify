@@ -3,7 +3,7 @@ import { useAlert } from '../context/AlertContext';
 
 
 const AllTasks = ({allTasks,userId,setModal,setEditTask}) => {
-  
+  let [loading,setLoading]=useState(false);
   const { showAlert } = useAlert()
     let i=0;
     const formatDate = (dateString) => {
@@ -21,7 +21,7 @@ const AllTasks = ({allTasks,userId,setModal,setEditTask}) => {
         )
     }
    async function deleteTask(whom,userId,taskId){
-
+setLoading(true)
     let data={
       whom:whom,
       userId:userId,
@@ -37,6 +37,7 @@ const AllTasks = ({allTasks,userId,setModal,setEditTask}) => {
     })
       .then(response => {
         if (!response.ok) {
+          showAlert('Unable to connect with server :( ')
           throw new Error('Network response was not ok');
         }
         return response.json();
@@ -58,12 +59,17 @@ const AllTasks = ({allTasks,userId,setModal,setEditTask}) => {
         
       })
       .catch(error => {
+        showAlert('Unable to connect with server :( ')
         console.error('There has been a problem with your fetch operation:', error);
+      })
+      .finally(()=>{
+        setLoading(false)
       })
       
     }
   return (
     <>
+    {loading && <center><span class="loader"></span></center> }
     {allTasks.length===0?<center><h1>No Tasks Available 😪</h1></center>:
     <div className='allTasks'>
       <table>
