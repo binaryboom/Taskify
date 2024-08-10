@@ -116,9 +116,9 @@ const TaskForm = ({ userId,created,setCreated ,setModal}) => {
                     id="dueDate"
                     {...register('dueDate')}
                     />
-            </div>
+            </div><br />
 
-            <div> <br />
+            <div className='together'> 
                 <label htmlFor="priority">Priority:</label>&nbsp;&nbsp;&nbsp;
                 <select {...register("priority")}>
                     <option value="Low">Low</option>
@@ -127,7 +127,8 @@ const TaskForm = ({ userId,created,setCreated ,setModal}) => {
                 </select>
                 {/* </div>
 
-<div> <br /> */} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<div> <br /> */} 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
                 <label htmlFor="status">Status:</label>&nbsp;&nbsp;&nbsp;
                 <select {...register("status")} >
@@ -138,7 +139,7 @@ const TaskForm = ({ userId,created,setCreated ,setModal}) => {
             </div>
 
             <div> <br />
-                <label htmlFor="assignedTo">Assigned To:</label>&nbsp;&nbsp;&nbsp;
+                <label htmlFor="assignedTo">Assign To:</label>&nbsp;&nbsp;&nbsp;
 
                 <div className="all-users">
                     {users.map((user) => (

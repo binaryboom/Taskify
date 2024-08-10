@@ -154,8 +154,8 @@ const UpdateTask = ({ userId,created,setCreated ,setModal,task}) => {
                   <label htmlFor="dueDate">Due Date:</label> &nbsp;&nbsp;&nbsp;
                   <input type="date" id="dueDate" {...register('dueDate')} />
                 </div>
-                <div>
                   <br />
+                <div className='together'>
                   <label htmlFor="priority">Priority:</label>&nbsp;&nbsp;&nbsp;
                   <select {...register('priority')}>
                     <option value="Low">Low</option>

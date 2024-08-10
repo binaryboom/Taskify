@@ -16,7 +16,7 @@ const inbox = ({userId}) => {
   
     return date.toLocaleDateString('en-IN', options) + '\n'
   }
-  let [emails,setEmails]=useState('none')
+  let [emails,setEmails]=useState('wait')
   useEffect(() => {
     setLoading(true)
     fetch('https://taskify-raghav.vercel.app/api/findAllEmails', {
@@ -54,15 +54,15 @@ const inbox = ({userId}) => {
     })
 
     },[]);
-    if(emails==='none'){
-      return (
-       <center><h1>No Emails Available 😪</h1></center>
-      )
-  }
+  //   if(emails==='none'){
+  //     return (
+  //      <center><h1>No Emails Available 😪</h1></center>
+  //     )
+  // }
   return (
     <>
-    {loading && <center><span class="loader"></span></center> }
-    {emails==='none'?<center><h1>No Emails Available 😪</h1></center>:
+    {emails==='wait'? loading && <center><span class="loader"></span></center> :
+    emails==='none'?<center><h1>No Emails Available 😪</h1></center>:
     <div className='inbox'>
       {emails.map(e=>(
 

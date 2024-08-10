@@ -105,6 +105,7 @@ td {
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow-x: auto;
     
 }
 
@@ -171,6 +172,7 @@ i{
     cursor: pointer;
 }
 
+
 .loader {
     animation: rotate 1s infinite;
     height: 50px;
@@ -179,6 +181,7 @@ i{
   
   .loader:before,
   .loader:after {
+    /* margin-top: 2rem; */
     border-radius: 50%;
     content: "";
     display: block;
@@ -232,4 +235,32 @@ i{
       margin-top: 0;
     }
   }
-  
+
+  @media only screen and (max-width: 767px) {
+      .together >label{
+      padding: 0.5rem;
+      }
+      label {
+        display: block;
+    }
+    .user-logged{
+        padding-bottom: 0.5rem;
+        width: 100vw;
+    }
+    .all-users{
+        gap: 0.5rem;
+    }
+
+    .content{
+       order: 4;
+    }
+   
+     .inbox-card{
+        display: grid;
+        gap: 0.2rem;
+     }
+     .allTasks{
+        /* align-items: flex-start; */
+        justify-content: flex-start;
+     }
+  }

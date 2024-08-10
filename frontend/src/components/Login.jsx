@@ -43,12 +43,12 @@ const Login = () => {
       )
     })
   }
-
+  
   const onSubmit = async (data) => {
     setLoading(true)
     console.log(data)
     fetch('https://taskify-raghav.vercel.app/api/login', {
-    // fetch('https://taskify-unhb.onrender.com/api/login', {
+      // fetch('https://taskify-unhb.onrender.com/api/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -65,16 +65,16 @@ const Login = () => {
       .then(data => {
         console.log(data);
         // if(data['error']==='Wrong Password'){
-        //   setMyError({show:true,message:'Wrong Password'})  ;
-        //   setTimeout(()=>{setMyError({})},2000) ;
-        //   setButton('Login');      
-        //   return;    
-        // }
-        if(data['error']){
-          setMyError({show:true,message:data['error']})  ;
-          showAlert(data['error']);
-          setTimeout(()=>{setMyError({})},2000) ;
-          // setButton('Login');      
+          //   setMyError({show:true,message:'Wrong Password'})  ;
+          //   setTimeout(()=>{setMyError({})},2000) ;
+          //   setButton('Login');      
+          //   return;    
+          // }
+          if(data['error']){
+            setMyError({show:true,message:data['error']})  ;
+            showAlert(data['error']);
+            setTimeout(()=>{setMyError({})},2000) ;
+            // setButton('Login');      
           return;    
         }
         if (data['exist']===true) {
@@ -100,14 +100,15 @@ const Login = () => {
       })
       .finally(() => {
         setLoading(false); 
-    });
-  }
-  if (logged) {
-    return <Home username={user.username} setButton={setButton} reset={reset} setCreated={setCreated} setLogged={setLogged} created={created} handleLogout={handleLogout} userId={user.userId}/>; // Render Home component if user is logged in
-  }
-  return (
-    <div className='login'>
+      });
+    }
+    if (logged) {
+      return <Home username={user.username} setButton={setButton} reset={reset} setCreated={setCreated} setLogged={setLogged} created={created} handleLogout={handleLogout} userId={user.userId}/>; // Render Home component if user is logged in
+    }
+    return (
+      <div className='login'>
       <h1>Login / Signup</h1>
+       
       <form onSubmit={handleSubmit(onSubmit)}>
         {button === 'Continue' ?
           <>
